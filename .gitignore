@@ -2,3 +2,5 @@ requirements.txt
 requirements1.txt
 test.py
 checking_dates.csv
+.DS_Store
+
