@@ -13,7 +13,7 @@ with open("checking_dates.csv", "w", encoding='UTF8') as csvfile: # Write the da
     writer.writerow(["Package", "Date"]) # Header
     result = []
     for package in packages_lines:
-        package = package.strip()
+        package = package.strip() # Strip the \n
         r = requests.get(f"https://pypi.org/pypi/{package}/json")
         data = r.json()
 
