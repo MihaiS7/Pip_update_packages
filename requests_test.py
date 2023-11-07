@@ -3,11 +3,11 @@ import veryfing_updating
 import subprocess
 import csv
 import datetime
-
+        
 
 if __name__ == "__main__":
-        packages_lines = veryfing_updating.verifying("requirements.txt")
-
+    packages_lines = veryfing_updating.verifying("requirements.txt")
+    
 with open("checking_dates.csv", "w", encoding='UTF8') as csvfile: # Write the data to a csv file
     writer = csv.writer(csvfile)
     writer.writerow(["Package", "Date"]) # Header of the file
@@ -25,10 +25,12 @@ with open("checking_dates.csv", "w", encoding='UTF8') as csvfile: # Write the da
         result[package]=sorting_date # Creating the dict - package-key, sorting_date-value
         sorted_dict = sorted(result.items(), key=lambda item: item[1]) # Sorting the values
 # print(sorted_dict)
-        for package_date in sorted_dict:
-                print(package_date)
-                writer.writerow([package_date])
-        
+    for package_date in sorted_dict:
+        print(f"This is package_date: {package_date}")
+        pack, da = (package_date)
+        print(f"This is package: {pack} and date: {da}")
+        writer.writerow([pack, da])
+
 
 subprocess.run(["open", "checking_dates.csv"]) # Open the csv file when is done
 
