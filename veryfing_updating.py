@@ -1,7 +1,7 @@
 def verifying(input_file):
-    with open(input_file, "r") as f:
+    with open(input_file, "r+") as f:
         read = f.readlines()
-        # print(read)
+        # print(len(read))
     return read
 
 
