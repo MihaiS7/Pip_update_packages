@@ -26,6 +26,7 @@ def writing_file(file):
             sorting_date = datetime.datetime.strptime(date,"%Y-%m-%d").strftime("%Y %m")
             result[package]=sorting_date # Creating the dict - package-key, sorting_date-value
             sorted_dict = sorted(result.items(), key=lambda item: item[1]) # Sorting the values
+
     # print(sorted_dict)
         for package_date in sorted_dict:
             pack, date_format = (package_date)
@@ -40,10 +41,7 @@ def writing_file(file):
                     packages_lines.remove(package)
                 except ValueError as e:
                     print(f"I encountered an error: {e}")
-                    
-                
-                
-                
+
 
 def today_year_month():
     today = datetime.datetime.today().strftime("%Y %m")
