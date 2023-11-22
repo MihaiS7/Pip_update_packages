@@ -11,19 +11,16 @@ def writing_file(file):
         writer.writerow(["Package", "Date"]) # Header of the file
         result = {}
         for package in packages_lines:
-            print(f"This is the package: {package}")
             r = requests.get(f"https://pypi.org/pypi/{package}/json")
             data = r.json()
 
             finding = [y for y in data.values()][-2] # Getting the [-2] list of values from the data requested
 
             date = [x['upload_time'] for x in finding if 'upload_time' in x][0][:10] # Get the first data in format (Y/M/D)
-            # print(f"{package} : {date}")
             sorting_date = datetime.datetime.strptime(date,"%Y-%m-%d").strftime("%Y %m")
             result[package]=sorting_date # Creating the dict - package-key, sorting_date-value
             sorted_dict = sorted(result.items(), key=lambda item: item[1]) # Sorting the values
 
-    # print(sorted_dict)
         for package_date in sorted_dict:
             pack, date_format = (package_date)
             
@@ -33,14 +30,13 @@ def writing_file(file):
             '''
             
             if you_set_date('2022-01') <= date_format <= today_year_month():
-                print(pack, date_format)
                 writer.writerow([pack, date_format])
             else:
                 #Delete package
                 try:
                     if packages_lines:
                         packages_lines.pop(0)
-                        print(f"Package deleted: {pack}")
+                        print(f"Package deleted: {pack} because of the date: {date_format}")
                 except ValueError as e:
                     print(f"I encountered an error: {e}")
 
@@ -55,17 +51,22 @@ def you_set_date(year_month):
 
 
 if __name__ == "__main__":
-    print("The script started!!!")  
+    print("The script begun...")  
     packages_lines = veryfing_updating.verifying("requirements.txt")
+    print('\033[1m'+"The script currently is reading the input file!\nPlease be patient!"+'\033[0m')
     packages_lines = list(map(str.strip, packages_lines)) # Eliminate the ( \n ) from the list
     # print(packages_lines)
     # you_set_date('2022-01')
+    
     writing_file("checking_dates.csv")
-    print(f"Today date: {today_year_month()}")
+    print('\033[1m'+"\nThe script finished to read the file")
+    print("\nNow we are writing the output file"+'\033[0m')
+    print(f"\nToday date: {today_year_month()}")
     new_lines_package = '\n'.join(packages_lines)
     veryfing_updating.writing("requirements.txt", new_lines_package)
 
-# subprocess.run(["open", "checking_dates.csv"]) # Open the csv file when is done
+print("The script is done!")
+subprocess.run(["open", "checking_dates.csv"]) # Open the csv file when is done
 
 
                 
