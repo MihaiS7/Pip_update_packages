@@ -10,5 +10,3 @@ def writing(output_file, lines):
     with open(output_file, "w") as f:
         f.writelines(lines)
 
-# verifying("requirements.txt")
-# writing("requirements.txt")
