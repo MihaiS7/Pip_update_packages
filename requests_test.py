@@ -4,7 +4,7 @@ import subprocess
 import csv
 import datetime
 
-    # print(packages_lines)
+
 def writing_file(file):
     with open(file, "w", encoding='UTF8') as csvfile: # Write the data to a csv file
         writer = csv.writer(csvfile)
@@ -28,8 +28,8 @@ def writing_file(file):
             pack, date_format = (package_date)
             
             '''
-            IF (the date you want to be the 'oldest package') is less or equal with (the date of the current package)
-                    is  less or equal with (the date of today)
+            IF ***(the date you want to be the 'oldest package')*** is less or equal with ***(the date of the current package)***
+                    is  less or equal with ***(the date of today)***
             '''
             
             if you_set_date('2022-01') <= date_format <= today_year_month():
