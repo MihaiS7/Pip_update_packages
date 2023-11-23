@@ -61,9 +61,9 @@ if __name__ == "__main__":
     print('\033[1m'+"\nThe script finished to read the file")
     print("\nNow we are writing the output file")
     print(f"\nToday date: {today_year_month()}"+'\033[0m')
-    new_lines_package = '\n'.join(packages_lines)
-    print(new_lines_package)
-    veryfing_updating.writing("requirements.txt", new_lines_package)
+    # new_lines_package = '\n'.join(packages_lines)
+    pip_install = [f'\npip install {element}' for element in packages_lines]
+    veryfing_updating.writing("requirements.txt", pip_install)
 
 print("The script is done!")
 subprocess.run(["open", "checking_dates.csv"]) # Open the csv file when is done
