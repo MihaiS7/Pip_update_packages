@@ -23,9 +23,9 @@ def writing_file(file):
 
         for package_date in sorted_dict:
             pack, date_format = (package_date)
-            
+            # print(f"This is the pack: {pack}, this is the date_format: {date_format}")
             '''
-            IF ***(the date you want to be the 'oldest package')*** is less or equal with ***(the date of the current package)***
+            IF 'you_set_date'***(the date you want to be the 'oldest package')*** is less or equal with 'date_format'***(the date of the current package)***
                     is  less or equal with ***(the date of today)***
             '''
             
@@ -36,7 +36,7 @@ def writing_file(file):
                 try:
                     if packages_lines:
                         packages_lines.pop(0)
-                        print(f"Package deleted: {pack} because of the date: {date_format}")
+                        # print(f"Package deleted: {pack} because of the date: {date_format}")
                 except ValueError as e:
                     print(f"I encountered an error: {e}")
 
@@ -55,14 +55,14 @@ if __name__ == "__main__":
     packages_lines = veryfing_updating.verifying("requirements.txt")
     print('\033[1m'+"The script currently is reading the input file!\nPlease be patient!"+'\033[0m')
     packages_lines = list(map(str.strip, packages_lines)) # Eliminate the ( \n ) from the list
-    # print(packages_lines)
     # you_set_date('2022-01')
-    
     writing_file("checking_dates.csv")
+    
     print('\033[1m'+"\nThe script finished to read the file")
-    print("\nNow we are writing the output file"+'\033[0m')
-    print(f"\nToday date: {today_year_month()}")
+    print("\nNow we are writing the output file")
+    print(f"\nToday date: {today_year_month()}"+'\033[0m')
     new_lines_package = '\n'.join(packages_lines)
+    print(new_lines_package)
     veryfing_updating.writing("requirements.txt", new_lines_package)
 
 print("The script is done!")
