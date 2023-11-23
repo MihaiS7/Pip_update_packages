@@ -30,7 +30,9 @@ def writing_file(file):
             '''
             
             if you_set_date('2022-01') <= date_format <= today_year_month():
+                result = subprocess.run(['pip', 'install', pack], capture_output=True, text=True)
                 writer.writerow([pack, date_format])
+                print(result.stdout)
             else:
                 #Delete package
                 try:
@@ -62,7 +64,9 @@ if __name__ == "__main__":
     print("\nNow we are writing the output file")
     print(f"\nToday date: {today_year_month()}"+'\033[0m')
     # new_lines_package = '\n'.join(packages_lines)
-    pip_install = [f'\npip install {element}' for element in packages_lines]
+    # pip_install = [f'\npip install {element}' for element in packages_lines] # Was trying a feature
+    pip_install = '\n'.join(packages_lines)
+    
     veryfing_updating.writing("requirements.txt", pip_install)
 
 print("The script is done!")
