@@ -30,7 +30,8 @@ def writing_file(file):
             '''
             
             if you_set_date('2022-01') <= date_format <= today_year_month():
-                result = subprocess.run(['pip', 'install', pack], capture_output=True, text=True)
+                # subprocess.run(['pip', 'uninstall', pack], capture_output=True, text=True)
+                result = subprocess.run(['pip', 'install', '--no-cache-dir', '--upgrade' ,pack], capture_output=True, text=True)
                 writer.writerow([pack, date_format])
                 print(result.stdout)
             else:
