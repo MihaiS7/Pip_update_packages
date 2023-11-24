@@ -34,7 +34,3 @@ The tool not only skips and delete the packages outside the defined interval but
 By following these steps, you can effortlessly keep your project dependencies up-to-date and well-organized.
 
 Feel free to explore the tool and improve your Python project's development experience! If you have any questions or suggestions, please don't hesitate to reach out.
-
-### To do list:
-1. When creating the pip requirements.txt file, it must also check if there is any left package locally
-2. Adding a way to check for the packages locally and if there is any version found delete it.
