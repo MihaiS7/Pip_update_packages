@@ -71,7 +71,7 @@ if __name__ == "__main__":
     veryfing_updating.writing("requirements.txt", pip_install)
 
 print("The script is done!")
-subprocess.run(["open", "checking_dates.csv"]) # Open the csv file when is done
+subprocess.run( ["open", "checking_dates.csv"] ) # Open the csv file when is done
 
 
                 
