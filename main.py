@@ -5,7 +5,8 @@ import csv
 import datetime
 
 
-def writing_file(file):
+def writing_file(file): 
+    
     with open(file, "w", encoding='UTF8') as csvfile: # Write the data to a csv file
         writer = csv.writer(csvfile)
         writer.writerow(["Package", "Date"]) # Header of the file
