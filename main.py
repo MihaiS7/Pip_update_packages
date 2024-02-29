@@ -1,9 +1,9 @@
 import requests
-import veryfing_updating
+import reading_writing
 import subprocess
 import csv
 import datetime
-
+import os
 
 def writing_file(file): 
     
@@ -53,10 +53,14 @@ def today_year_month():
 def you_set_date(year_month):
     return datetime.datetime.strptime(year_month, "%Y-%m").strftime("%Y %m")
 
+def getting_input_file(input_file):
+    os.system(f"pip3 list --outdated --format=columns > {input_file}")
+    return input_file
 
 if __name__ == "__main__":
     print("The script begun...")  
-    packages_lines = veryfing_updating.verifying("requirements.txt")
+    input_file = getting_input_file("requirements.txt")
+    packages_lines = reading_writing.verifying(input_file)
     print('\033[1m'+"The script currently is reading the input file!\nPlease be patient!"+'\033[0m')
     packages_lines = list(map(str.strip, packages_lines)) # Eliminate the ( \n ) from the list
     # you_set_date('2022-01')
@@ -69,7 +73,7 @@ if __name__ == "__main__":
     # pip_install = [f'\npip install {element}' for element in packages_lines] # Was trying a feature
     pip_install = '\n'.join(packages_lines)
     
-    veryfing_updating.writing("requirements.txt", pip_install)
+    reading_writing.writing("requirements.txt", pip_install)
 
 print("The script is done!")
 subprocess.run( ["open", "checking_dates.csv"] ) # Open the csv file when is done
