@@ -6,12 +6,14 @@ import datetime
 import os
 
 def writing_file(file): 
-    
+
     with open(file, "w", encoding='UTF8') as csvfile: # Write the data to a csv file
         writer = csv.writer(csvfile)
         writer.writerow(["Package", "Date"]) # Header of the file
         result = {}
-        for package in packages_lines:
+
+        for packages in packages_lines[2:]:
+            package = packages[0]
             r = requests.get(f"https://pypi.org/pypi/{package}/json")
             data = r.json()
 
@@ -34,7 +36,7 @@ def writing_file(file):
                 # subprocess.run(['pip', 'uninstall', pack], capture_output=True, text=True)
                 result = subprocess.run(['pip', 'install', '--no-cache-dir', '--upgrade' ,pack], capture_output=True, text=True)
                 writer.writerow([pack, date_format])
-                print(result.stdout)
+                # print(result.stdout)
             else:
                 #Delete package
                 try:
@@ -43,7 +45,6 @@ def writing_file(file):
                         # print(f"Package deleted: {pack} because of the date: {date_format}")
                 except ValueError as e:
                     print(f"I encountered an error: {e}")
-
 
 
 def today_year_month():
@@ -62,8 +63,8 @@ if __name__ == "__main__":
     input_file = getting_input_file("requirements.txt")
     packages_lines = reading_writing.verifying(input_file)
     print('\033[1m'+"The script currently is reading the input file!\nPlease be patient!"+'\033[0m')
-    packages_lines = list(map(str.strip, packages_lines)) # Eliminate the ( \n ) from the list
-    # you_set_date('2022-01')
+    # packages_lines = list(map(str.strip, packages_line)) # Eliminate the ( \n ) from the list
+    # you_set_date('2022-01') # You set the date here
     writing_file("checking_dates.csv")
     
     print('\033[1m'+"\nThe script finished to read the file")
@@ -71,11 +72,13 @@ if __name__ == "__main__":
     print(f"\nToday date: {today_year_month()}"+'\033[0m')
     # new_lines_package = '\n'.join(packages_lines)
     # pip_install = [f'\npip install {element}' for element in packages_lines] # Was trying a feature
-    pip_install = '\n'.join(packages_lines)
+    # print(f"Before pip_install: {packages_lines}")
+    # pip_install = '\n'.join()
     
-    reading_writing.writing("requirements.txt", pip_install)
+    # reading_writing.writing("requirements.txt", pip_install)
 
 print("The script is done!")
+print("Opening the csv file...")
 subprocess.run( ["open", "checking_dates.csv"] ) # Open the csv file when is done
 
 
